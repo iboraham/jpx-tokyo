@@ -2,18 +2,19 @@
 
 ---
 
-## Steps
+## Steps
 
-- [] Read all the discussions
-- [] Read all the codes
-- [] Define Problem
-- [] Literature Review on the problem e.g paperswithcode.com
-- [] Baseline Solution
-- [] Feature Engineering e.g. work more on the data
-- [] More complicated model or fine tune model
+- [ ] Read all the discussions
+- [ ] Read all the codes
+- [ ] Define Problem
+- [ ] Literature Review on the problem e.g paperswithcode.com
+- [ ] Baseline Solution
+- [ ] Feature Engineering e.g. work more on the data
+- [ ] More complicated model or fine tune model
 
-## Discussion notes
+## Discussion notes
 **- How to make submission?**
+
 Here is an example code,
 
 ```python
@@ -25,4 +26,4 @@ for (prices, options, financials, trades, secondary_prices, sample_prediction) i
     env.predict(sample_prediction_df)   # register your predictions
 ```
 
-## Peer Code notes
+## Peer Code notes
