@@ -8,7 +8,7 @@ USE_FINETUNE = True
 FOLDS = 5
 SEED = 42
 
-train, features, target = get_train_data(train)
+train, features, target = get_train_data()
 train = utils.reduce_mem_usage(train)
 
 
