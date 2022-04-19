@@ -1,7 +1,6 @@
 from keras.layers import Input, Dense, BatchNormalization, Dropout, Concatenate, Lambda, GaussianNoise
 from keras.models import Model, Sequential
 from keras.losses import BinaryCrossentropy
-from keras.optimizers import Adam
 import tensorflow as tf
 import numpy as np
 import pandas as pd
@@ -108,7 +107,7 @@ def create_autoencoder(input_dim, output_dim, noise=0.05):
     encoder = Model(inputs=i, outputs=encoded)
     autoencoder = Model(inputs=i, outputs=[decoded, x])
 
-    autoencoder.compile(optimizer=Adam(0.001),
+    autoencoder.compile(optimizer=tf.keras.optimizers.Adam(0.001),
                         loss={
                             'decoded': 'mse',
                             'label_output': 'binary_crossentropy'
@@ -131,7 +130,7 @@ def create_model(hp, input_dim, output_dim, encoder):
         x = Dropout(hp.Float(f'dropout_{i}', 0.0, 0.5))(x)
     x = Dense(output_dim, activation='sigmoid')(x)
     model = Model(inputs=inputs, outputs=x)
-    model.compile(optimizer=Adam(hp.Float('lr', 0.00001, 0.1, default=0.001)),
+    model.compile(optimizer=tf.keras.optimizers.Adam(hp.Float('lr', 0.00001, 0.1, default=0.001)),
                   loss=BinaryCrossentropy(
                       label_smoothing=hp.Float('label_smoothing', 0.0, 0.1)),
                   metrics=[tf.keras.metrics.AUC(name='auc')])
