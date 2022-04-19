@@ -4,19 +4,19 @@ import numpy as np
 PATH = 'db/train_files/stock_prices.csv'
 
 
-def get_train_data() -> tuple[pd.DataFrame, list]:
+def get_train_data() -> tuple[pd.DataFrame, list, str]:
     """
     Get the training data.
 
     Returns:
-        tuple[pd.DataFrame, list]: The training data and the list of features.
+        tuple[pd.DataFrame, list, str]: The training data and the list of features.
     """
     df = read_data()
     df = feature_engineering(df)
     features = ['Side', 'ret_H', 'ret_L', 'ret', 'ret_Div',
                 'log_Dollars', 'GK_sqrt_vol', 'RS_sqrt_vol']
     df[features] = df[features].astype('float32')
-    return df, features
+    return df, features, 'Target'
 
 
 def read_data() -> pd.DataFrame:
