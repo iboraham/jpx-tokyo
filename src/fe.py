@@ -26,7 +26,7 @@ def read_data() -> pd.DataFrame:
     Returns:
         pd.DataFrame: The data.
     """
-    df = dt.read_csv(f'{PATH}').to_pandas()
+    df = dt.fread(f'{PATH}').to_pandas()
     return df
 
 
