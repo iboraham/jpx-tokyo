@@ -19,13 +19,6 @@ from sklearn.model_selection._split import _BaseKFold, indexable, _num_samples
 from sklearn.utils.validation import _deprecate_positional_args
 
 
-def prep_prices(prices):
-    prices.Date = pd.to_datetime(prices.Date).view(int)
-    prices["Volume"].fillna(1, inplace=True)
-    prices.fillna(0, inplace=True)
-    return prices
-
-
 def create_mlp(num_columns, num_labels, hidden_units, dropout_rates,
                label_smoothing, learning_rate):
 
