@@ -13,6 +13,7 @@
 - [ ] More complicated model or fine tune model
 
 ## Discussion notes
+
 **- How to make submission?**
 
 Here is an example code,
@@ -26,4 +27,18 @@ for (prices, options, financials, trades, secondary_prices, sample_prediction) i
     env.predict(sample_prediction_df)   # register your predictions
 ```
 
+**- Previous Examples like this**
+
+> Jquants -> https://www.jpx.co.jp/english/corporate/news/news-releases/0010/20210813-01.html
+
+> Jane -> https://www.kaggle.com/competitions/jane-street-market-prediction
+
 ## Peer Code notes
+
+## Plan
+
+- [ ] Read data with utils.import_data
+- [ ] Train encoder
+- [ ] Use encoder to generate more data
+- [ ] Train model with CVTuner
+- [ ] Make predictions
