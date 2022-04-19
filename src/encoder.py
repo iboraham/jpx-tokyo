@@ -1,25 +1,6 @@
-from tensorflow.keras.layers import Input, Dense, BatchNormalization, Dropout, Concatenate, Lambda, GaussianNoise, Activation
-from tensorflow.keras.models import Model, Sequential
-from tensorflow.keras.losses import BinaryCrossentropy
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.callbacks import EarlyStopping
-from tensorflow.keras.layers.experimental.preprocessing import Normalization
-import tensorflow as tf
-import numpy as np
-import pandas as pd
-import datatable as dt
-from sklearn.model_selection import GroupKFold
-
-from tqdm import tqdm
-from random import choices
-
-import kerastuner as kt
-
-from sklearn.model_selection import KFold
-from sklearn.model_selection._split import _BaseKFold, indexable, _num_samples
-from sklearn.utils.validation import _deprecate_positional_args
-
-from utils import *
+from fe import get_train_data
+from keras.callbacks import EarlyStopping
+import utils
 
 # Load
 TRAINING = True
@@ -27,18 +8,16 @@ USE_FINETUNE = True
 FOLDS = 5
 SEED = 42
 
-train = dt.fread(
-    '../db/train_files/stock_prices.csv').to_pandas()
-train = prep_prices(train)
-train = reduce_mem_usage(train)
+train, features, target = get_train_data(train)
+train = utils.reduce_mem_usage(train)
 
-features = ["Date", "SecuritiesCode", "Open", "High", "Low", "Close", "Volume"]
 
 X = train[features].values
-y = train['Target'].values  # Multitarget
+y = train[target].values
 
 # encode
-autoencoder, encoder = create_autoencoder(X.shape[-1], y.shape[-1], noise=0.1)
+autoencoder, encoder = utils.create_autoencoder(
+    X.shape[-1], y.shape[-1], noise=0.1)
 if TRAINING:
     autoencoder.fit(X, (X, y),
                     epochs=1000,
