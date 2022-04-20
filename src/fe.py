@@ -29,6 +29,11 @@ def read_data() -> pd.DataFrame:
     df = dt.fread(f'{PATH}').to_pandas()
     return df
 
+def prep_prices(prices):
+    prices.Date = pd.to_datetime(prices.Date).view(int)
+    prices["Volume"].fillna(1,inplace=True)
+    prices.fillna(0,inplace=True)
+    return prices
 
 def feature_engineering(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -40,6 +45,7 @@ def feature_engineering(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: The data with the new features.
     """
+    df = prep_prices(df)
     df['Avg_Price'] = (df['Close']+df['Open'])/2
     df['Avg_Price_HL'] = (df['High']+df['Low'])/2
     df['Side'] = 2*(df['Avg_Price']-df['Avg_Price_HL']) / \
