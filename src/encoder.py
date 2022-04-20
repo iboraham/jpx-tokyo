@@ -12,7 +12,7 @@ train, features, target = get_train_data()
 
 
 X = train[features].values
-y = train[target].values
+y = train[target].values.reshape(-1, 1)
 
 # encode
 autoencoder, encoder = utils.create_autoencoder(
