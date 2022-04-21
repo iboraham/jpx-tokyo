@@ -38,6 +38,7 @@ for (prices, options, financials, trades, secondary_prices, sample_prediction) i
 ## Plan
 
 - [ ] Read data with utils.import_data
+- [ ] Feature Engineering with fe.py
 - [ ] Train encoder
 - [ ] Use encoder to generate more data
 - [ ] Train model with CVTuner
